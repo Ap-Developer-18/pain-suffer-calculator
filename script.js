@@ -33,24 +33,22 @@ calculationForm.addEventListener("submit", function (e) {
   const hospitalDays = Number(hospitalDaysInput.value) || 0;
 
   const baseCompensation = (disability / 100) * totalAmmount;
-
-  let afterAgeCompensation = baseCompensation;
   if (age > 30) {
-    afterAgeCompensation = afterAgeCompensation * (1 - (age - 30) / 100); // jitni age 30 se jyada hogi utni hi % base compensation me se ghategi
+    baseCompensation = baseCompensation * (1 - (age - 30) / 100); // jitni age 30 se jyada hogi utni hi % base compensation me se ghategi
     ifAgeAboveThirty.classList.remove("hidden");
     ifAgeAboveThirty.innerText = `Note: Since the age of the victim is above 30, the compensation amount has been reduced by ${
       age - 30
     }%.`;
   }
 
-  const years = (currentDate - accidentDate) / (1000 * 60 * 60 * 24 * 365.25); // convert milliseconds to years
+  const totalYears =
+    (currentDate - accidentDate) / (1000 * 60 * 60 * 24 * 365.25); // convert milliseconds to totalYears
+  console.log(totalYears);
 
-  const interest = afterAgeCompensation * intrest * years;
+  const interest = baseCompensation * intrest * totalYears;
   const hospitalAmount = hospitalDays * hospitalPerDay;
 
-  const finalAmount = Math.round(
-    afterAgeCompensation + interest + hospitalAmount
-  );
+  const finalAmount = Math.round(baseCompensation + interest + hospitalAmount);
 
   resultDisplay.innerText = `₹ ${finalAmount.toLocaleString()}`;
 
@@ -60,8 +58,8 @@ calculationForm.addEventListener("submit", function (e) {
     ` * ` +
     `${totalAmmount.toLocaleString()} = ₹ ${baseCompensation}`;
   detailBeforeAge.innerText = baseCompensation;
-  detailAfterAge.innerText = Math.round(afterAgeCompensation);
-  detailPeriod.innerText = `${years.toFixed(2)} years`;
+  detailAfterAge.innerText = Math.round(baseCompensation);
+  detailPeriod.innerText = `${totalYears.toFixed(2)} years`;
   detailInterest.innerText = `+ ₹ ${Math.round(interest)}`;
   detailFinal.innerText = `₹ ${finalAmount}`;
 });
