@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Compensation Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-[#d6c9b8] min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- LEFT SIDE -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm">
+        <h2 class="text-2xl font-semibold text-center mb-6">
+          Calculation result
+        </h2>
+        <div
+          class="bg-green-50 border border-green-200 rounded-xl p-6 text-center mb-4"
+        >
+          <p class="text-green-700 font-medium mb-2">
+            Estimating the amount of compensation<br />
+            (according to the law)
+          </p>
+          <p id="compensation-amount" class="text-4xl font-bold text-green-700">
+            ₹ 0
+          </p>
+        </div>
+        <button
+          id="toggle-details"
+          class="w-full bg-[#9a8871] text-white py-3 rounded-xl font-semibold mb-4"
+        >
+          Hide details
+        </button>
+        <div
+          id="calculation-details"
+          class="border rounded-xl p-5 space-y-4 text-sm"
+        >
+          <h3 class="text-green-600 font-semibold text-lg">
+            Calculation according to legal regulations:
+          </h3>
+
+          <div class="flex flex-col space-y-3">
+            <div class="flex justify-between items-center w-full">
+              <span>Disability percentage:</span>
+              <span id="detail-disability">-</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span>Disability compensation:</span>
+              <span id="detail-disability-amount">-</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span>Amount before age adjustment:</span>
+              <span id="detail-before-age">-</span>
+            </div>
+
+            <div id="if-age-above-thirty" class="text-red-600 hidden"></div>
+
+            <div class="flex items-center justify-between">
+              <span>Amount after age adjustment:</span>
+              <span id="detail-after-age">-</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span>Period:</span>
+              <span id="detail-period">-</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span>Linkage & interest (2% annual):</span>
+              <span id="detail-interest">-</span>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="flex justify-between font-semibold text-lg">
+            <span>Final compensation amount:</span>
+            <span id="detail-final">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <form
+        id="pain-calculation-form"
+        class="bg-white rounded-2xl p-6 shadow-sm"
+      >
+        <h2 class="text-2xl font-semibold text-center mb-6">
+          Data for calculation
+        </h2>
+
+        <div class="space-y-5">
+          <div>
+            <label class="block font-medium mb-1"
+              >Disability percentage (%)</label
+            >
+            <input
+              id="disability-percentage"
+              type="number"
+              min="0"
+              max="100"
+              required
+              class="w-full border rounded-xl px-4 py-3"
+            />
+          </div>
+
+          <div>
+            <label class="block font-medium mb-1">Age of the victim</label>
+            <input
+              id="age-of-victim"
+              type="number"
+              min="0"
+              required
+              class="w-full border rounded-xl px-4 py-3"
+            />
+          </div>
+
+          <div>
+            <label class="block font-medium mb-1">Date of accident</label>
+            <input
+              id="accident-date"
+              type="date"
+              required
+              class="w-full border rounded-xl px-4 py-3"
+            />
+          </div>
+
+          <div>
+            <label class="block font-medium mb-1">Calculation date</label>
+            <input
+              id="current-date"
+              type="date"
+              required
+              class="w-full border rounded-xl px-4 py-3"
+            />
+          </div>
+
+          <div>
+            <label class="block font-medium mb-1">
+              Hospitalization days (optional)
+            </label>
+            <input
+              id="hospital-days"
+              type="number"
+              min="0"
+              class="w-full border rounded-xl px-4 py-3"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-green-700 text-white py-3 rounded-xl font-semibold hover:bg-green-800"
+          >
+            Calculate Compensation
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
